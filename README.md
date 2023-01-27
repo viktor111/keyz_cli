@@ -1,3 +1,5 @@
+https://crates.io/crates/keyzcli
+
 ## Install with cargo
 1. `cargo install keyzcli`
 2. `keyzcli`
