@@ -46,7 +46,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "keyz_cli"
+name = "keyzcli"
 version = "0.1.0"
 dependencies = [
  "ctrlc",

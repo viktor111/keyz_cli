@@ -1,4 +1,4 @@
-use std::{error::Error, sync::Arc};
+use std::{error::Error, sync::Arc, io::{self, Write}};
 use tokio::{
     io::{AsyncReadExt, AsyncWriteExt},
     net::TcpStream,
@@ -19,7 +19,22 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     });
     loop {
         let mut input = String::new();
+        print!(">> ");
+        io::stdout().flush().unwrap();
         std::io::stdin().read_line(&mut input)?;
+        
+        if input.trim() == "help" {
+            println!("
+            SET [key] [value] - set a key value pair
+            SET [key] [value] EX [ttl] - set a key value pair with a time to live in seconds
+            GET [key] - get the value of a key
+            DEL [key] - delete a key value pair
+            EXIN [key] - check time key has left to live
+            CLOSE - close the connection
+            help - show this help message
+            ");
+            continue;
+        }
 
         if input.trim() == "CLOSE" {
             disconnect(&stream).await?;
@@ -62,6 +77,7 @@ pub async fn send_message(
     message: &str,
 ) -> Result<(), Box<dyn Error>> {
     let mut stream = stream.lock().await;
+    //stream.write_all(&[BYTE_PASSWORD]).await?;
     let len = message.len() as u32;
     let len_bytes = len.to_be_bytes();
     stream.write_all(&len_bytes).await?;
