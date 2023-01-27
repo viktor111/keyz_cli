@@ -8,3 +8,6 @@
 2. Find the latest release
 3. Download the bin for linux or exe for windows
 4. Run
+
+## Getting started
+ - type `help` to see list of commands or head over to keyz repo for full list and examples [here](https://github.com/viktor111/keyz)

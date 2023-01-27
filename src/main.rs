@@ -17,6 +17,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         disconnect(&stream_clone).await.unwrap();
         std::process::exit(0);
     });
+    println!("type help for a list of commands");
     loop {
         let mut input = String::new();
         print!(">> ");
